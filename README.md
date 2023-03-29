@@ -33,10 +33,14 @@ This one only gave a partial server function so I went with ...
 
 [Code](https://github.com/jwildfire/shiny-gpt-demo/blob/main/app_v3_4.r) still doesn't run. Looks like the onStartup function has syntax issues.
 
+![image](https://user-images.githubusercontent.com/3680095/228649230-37362ba7-a0e2-4423-80bc-22b7f42d78e6.png)
 ![Screen Shot 2023-03-29 at 3 36 42 PM](https://user-images.githubusercontent.com/3680095/228648820-7935e23c-993b-425a-b36d-3b98d1bd2d99.png)
 
 Let's see if it can fix it ... 
 
 # Prompt 5: onStartup() throws a syntax error. make sure to define it as an R function.
+
+
+
 
 
