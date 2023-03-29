@@ -2,9 +2,9 @@
 
 I built a little Issue Management Shiny App with ChatGPT.
 
-# Prompt 1: make me an R shiny app that implements a basic issue management system
+# Prompt 1: make me an R shiny app that implements a basic issue management system 
 
-Made an app that runs but, didn't actually populate the UI :( 
+Made an app that runs ([code](https://github.com/jwildfire/shiny-gpt-demo/blob/main/app_v1.r)) but, didn't actually populate the UI :( 
 
 ![image](https://user-images.githubusercontent.com/3680095/228597247-b83dfb45-3e8c-4dce-b7a3-3654e0e46f0e.png)
 
@@ -12,7 +12,7 @@ Made an app that runs but, didn't actually populate the UI :(
 
 # Prompt 2: update the app so that i can edit existing issues
 
-This triggered updates in the UI!
+This triggered updates in the UI [code](https://github.com/jwildfire/shiny-gpt-demo/blob/main/app_v2.r)!
 
 ![0837a7a8-ae53-468e-b402-f992107d15d2](https://user-images.githubusercontent.com/3680095/228607383-bc48468d-bd99-406c-a83b-8267763d4f9b.jpg)
 ![5991868a-5334-49d6-a85f-1242ba79da3f](https://user-images.githubusercontent.com/3680095/228607385-72211d99-5448-4c65-bc7f-b06ffe73f713.jpg)
@@ -27,7 +27,9 @@ At this point we've got a functional little prototype. Let's see if we can do mo
 
 This one only gave a partial server function so I went with ...
 
-# Prompt 4: The server function doesn't have a closing curly bracket. fix that please.
+# Prompt 4: The server function doesn't have a closing curly bracket. fix that please. 
+
+[code](https://github.com/jwildfire/shiny-gpt-demo/blob/main/app_v3_4.r)
 
 
 
