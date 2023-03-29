@@ -1,35 +1,18 @@
-# Install and load the necessary packages:
-install.packages(c("shiny", "shinydashboard", "DT", "RSQLite"))
 library(shiny)
-library(shinydashboard)
 library(DT)
 library(RSQLite)
 
 # Define the UI
-ui <- dashboardPage(
-  dashboardHeader(title = "Issue Management System"),
-  dashboardSidebar(
-    sidebarMenu(
-      menuItem("Create Issue", tabName = "create", icon = icon("plus")),
-      menuItem("View Issues", tabName = "view", icon = icon("list"))
-    )
-  ),
-  dashboardBody(
-    tabItems(
-      tabItem(tabName = "create",
-              h2("Create Issue"),
-              # add form inputs for issue details
-              textInput("title", "Title"),
-              textAreaInput("description", "Description"),
-              actionButton("submit", "Submit")
-              ),
-      tabItem(tabName = "view",
-              h2("View Issues"),
-              # display issues in a table
-              DT::dataTableOutput("issue_table")
-              )
-    )
-  )
+ui <- fluidPage(
+  
+  # input form
+  textInput("title", "Title"),
+  textAreaInput("description", "Description"),
+  actionButton("submit", "Submit"),
+  
+  # issue table
+  dataTableOutput("issue_table")
+  
 )
 
 # Define the server logic
@@ -57,13 +40,6 @@ server <- function(input, output, session) {
     stringsAsFactors = FALSE
   ))
   
-  # load issues from the database when the app starts
-  onSessionStarted(function() {
-    query <- dbSendQuery(conn, "SELECT * FROM issues")
-    issues(dbFetch(query))
-    dbClearResult(query)
-  })
-  
   # observe when a new issue is submitted and add it to the database and dataframe
   observeEvent(input$submit, {
     new_issue <- data.frame(
@@ -84,16 +60,20 @@ server <- function(input, output, session) {
   })
   
   # update the issue status in the database when it is edited in the app
-  observeEvent(input$edit_issue, {
+  observeEvent(input$issue_table_cell_edit, {
+    info = input$issue_table_cell_edit
+    col = info$col + 1
+    row = info$row
+    id = issues()[row, "IssueID"]
+    new_val = info$value
     dbSendQuery(conn, paste0("
       UPDATE issues
-      SET ", colnames(issues())[input$edit_issue$column], " = '",
-        input$edit_issue$value, "'
-      WHERE IssueID = ", input$edit_issue$id
+      SET ", colnames(issues())[col], " = '",
+        new_val, "'
+      WHERE IssueID = ", id
     ))
     # update the issues dataframe
-    issues()[issues()$IssueID == input$edit_issue$id, 
-            input$edit_issue$column] <- input$edit_issue$value
+    issues()[row, col] <- new_val
   })
   
   # display the issues in a table
@@ -106,24 +86,34 @@ server <- function(input, output, session) {
                        "  $(row).addClass(data[3]);",
                        "}"
                      )),
-      editable = TRUE,
-      callback = JS(
-        "table.on('edit.dt', function(e, cell, splice, newVal) {",
-        "  var row = cell.index().row;",
-        "  var column = cell.index().column;",
-        "  var id = table.cell(row, 0).data();",
-        "  Shiny.setInputValue('edit_issue', {'id': id, 'column': column, 'value': newVal});",
-        "});"
-      )
+      editable = TRUE
     )
   })
   
   # close the database connection when the app stops
-  onSessionEnded(function() {
+  onStop(function() {
     dbDisconnect(conn)
   })
+  
 }
 
+# define the startup function to load issues from the database when the app starts
+startup <- function() {
+  # create a connection to the database
+  conn <- dbConnect(RSQLite::SQLite(), "issues.db")
+  
+  # load issues from the database into a data frame
+  issues_df <- dbGetQuery(conn, "SELECT * FROM issues")
+  
+  # create a reactive dataframe to store issues
+  issues <- reactiveVal(issues_df)
+  
+  # close the database connection
+  dbDisconnect(conn)
+  
+  # return the reactive dataframe
+  issues
+}
 
 # Run the application
-shinyApp(ui = ui, server = server)
+shinyApp(ui = ui, server=server, onStart=startup)
