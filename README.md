@@ -31,4 +31,12 @@ This one only gave a partial server function so I went with ...
 
 # Prompt 4: The server function doesn't have a closing curly bracket. fix that please. 
 
-[code](https://github.com/jwildfire/shiny-gpt-demo/blob/main/app_v3_4.r)
+[Code](https://github.com/jwildfire/shiny-gpt-demo/blob/main/app_v3_4.r) still doesn't run. Looks like the onStartup function has syntax issues.
+
+![Screen Shot 2023-03-29 at 3 36 42 PM](https://user-images.githubusercontent.com/3680095/228648820-7935e23c-993b-425a-b36d-3b98d1bd2d99.png)
+
+Let's see if it can fix it ... 
+
+# Prompt 5: onStartup() throws a syntax error. make sure to define it as an R function.
+
+
