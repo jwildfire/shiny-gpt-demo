@@ -38,9 +38,13 @@ This one only gave a partial server function so I went with ...
 
 Let's see if it can fix it ... 
 
-# Prompt 5: onStartup() throws a syntax error. make sure to define it as an R function.
+# Prompt 5-8: Issues with executing code when the app starts ...
 
+![image](https://user-images.githubusercontent.com/3680095/228652335-c5c8abc1-5d45-4c0f-8553-1889b9f74612.png)
 
+Seems like it's looking for some session functions here, but I'm not sure they actually exist.  I just copied a few error messages in to chatGPT a few times to see if it could figure it out, but no luck. Then I tried googling a little which brought me to the  `onStart` parameter in `shinyApp()`, so I tried to convince it to use that. After a few tries we got this [code]()
+
+# Prompt 7: 
 
 
 
