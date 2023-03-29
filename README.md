@@ -1,6 +1,8 @@
 # Shiny GPT Demo
 
-I built a little Issue Management Shiny App with ChatGPT.
+I asked ChatGPT to make me a little Issue Management Shiny App. Here's how it went!
+
+![image](https://user-images.githubusercontent.com/3680095/228610405-5450b0f5-1fde-43d6-a45a-ca40a614a02c.png)
 
 # Prompt 1: make me an R shiny app that implements a basic issue management system 
 
@@ -30,7 +32,3 @@ This one only gave a partial server function so I went with ...
 # Prompt 4: The server function doesn't have a closing curly bracket. fix that please. 
 
 [code](https://github.com/jwildfire/shiny-gpt-demo/blob/main/app_v3_4.r)
-
-
-
-
