@@ -42,9 +42,8 @@ Let's see if it can fix it ...
 
 ![image](https://user-images.githubusercontent.com/3680095/228652335-c5c8abc1-5d45-4c0f-8553-1889b9f74612.png)
 
-Seems like it's looking for some session functions here, but I'm not sure they actually exist.  I just copied a few error messages in to chatGPT a few times to see if it could figure it out, but no luck. Then I tried googling a little which brought me to the  `onStart` parameter in `shinyApp()`, so I tried to convince it to use that. After a few tries we got this [code]()
+Seems like it's looking for some session functions here, but I'm not sure they actually exist.  I just copied a few error messages in to chatGPT a few times to see if it could figure it out, but no luck. Then I tried googling a little which brought me to the  `onStart` parameter in `shinyApp()`, so I tried to convince it to use that. After a few tries we got this [Code](https://github.com/jwildfire/shiny-gpt-demo/blob/main/app_v5.r) which does run, but bombs when you click submit. 
 
-# Prompt 7: 
+![image](https://user-images.githubusercontent.com/3680095/228659062-4a7051ce-c5c8-444e-901d-8057ad2d8aa5.png)
 
-
-
+Seems like this is close, but it isn't my area of exprtise (and I'm here to play with ChatGPT not debug it's work) so going to leave it here for now. 
